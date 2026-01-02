@@ -437,3 +437,37 @@ Ambos endpoints apuntan a la misma URL:
 </configuration>
 
 
+⚙️ Configuración en App.config
+Este archivo define las secciones de configuración, tanto para parámetros de usuario como de aplicación, en el proyecto Monitor2.0.
+🔑 Parámetros de userSettings
+- UserName
+Nombre de usuario de la aplicación.
+- S3AccessKey
+Clave de acceso para el servicio S3.
+- S3Secret
+Llave secreta para el servicio S3.
+- S3BucketName
+Nombre del bucket S3 utilizado.
+- S3ClientName
+Nombre del cliente S3.
+- APIToken
+Token de autenticación para la API.
+- APITokenDate
+Fecha de emisión del token de API.
+
+🔑 Parámetros de applicationSettings
+- CommandTimeout
+Tiempo máximo para ejecutar un comando individual: 10 segundos.
+- CommandTimeoutBulk
+Tiempo máximo para ejecutar comandos en lote: 250 segundos.
+- UnitTimeout1
+Tiempo de espera para la primera operación de unidad: 45 segundos.
+- DB
+Cadena de conexión a la base de datos:
+Host=trfunitsdb.cg6e0iwuu3gz.us-east-2.rds.amazonaws.com;Username=trf_unit_data_usr;Password=adrP@S7xHvSynP;Database=trf_unit_data
+- Server1
+Servidor principal: units-admin.mx.questarauto.com.
+- UnitTimeout2
+Tiempo de espera para la segunda operación de unidad: 5 segundos.
+- DisconnectedTime
+Tiempo máximo permitido para considerar una unidad desconectada: 120 segundos.
