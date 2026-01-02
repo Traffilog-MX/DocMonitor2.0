@@ -60,3 +60,61 @@ El tipo exacto de proyecto se define en la primera línea del `.csproj`:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+
+# Clase Resources.Designer.cs
+
+Este archivo corresponde a la clase **`Resources`** ubicada en:
+
+```xml
+C:\Users\Numaris Traffilog\source\repos\Monitor2.0\Properties\Resources.Designer.csproj
+
+
+---
+
+## 📌 Descripción
+
+- La clase **`Resources`** es **auto-generada** por Visual Studio mediante la herramienta **StronglyTypedResourceBuilder**.  
+- Su propósito es proveer acceso **fuertemente tipado** a recursos embebidos en el proyecto, como:
+  - Cadenas localizadas (strings).
+  - Archivos `.resx` (recursos de internacionalización).
+  - Íconos, imágenes y otros recursos asociados.  
+- **No debe editarse manualmente**, ya que cualquier cambio se perderá al regenerar el archivo.
+
+---
+
+## 🛠️ Funcionalidad principal
+
+- **`ResourceManager`**  
+  - Devuelve una instancia en caché de `System.Resources.ResourceManager`.  
+  - Se utiliza para buscar y cargar recursos embebidos en el ensamblado.  
+
+- **`Culture`**  
+  - Permite sobrescribir la cultura (`CultureInfo`) utilizada en las búsquedas de recursos.  
+  - Útil para cambiar dinámicamente el idioma de la aplicación.  
+
+---
+
+## ⚙️ Atributos importantes
+
+- `[GeneratedCode]` → indica que el archivo fue generado automáticamente por una herramienta.  
+- `[DebuggerNonUserCode]` → evita que el depurador entre en este código.  
+- `[CompilerGenerated]` → señala que el compilador generó parte del código.  
+- `[SuppressMessage]` → suprime advertencias específicas de análisis estático.  
+
+---
+
+## 🚀 Uso en el proyecto
+
+1. Los recursos se definen en el archivo **`Resources.resx`** dentro de la carpeta `Properties`.  
+2. Al compilar, Visual Studio genera automáticamente esta clase para acceder a dichos recursos.  
+3. Ejemplo de uso en código:
+
+```csharp
+// Obtener un recurso localizado
+string mensaje = Monitor2._0.Properties.Resources.MiCadena;
+
+// Cambiar cultura para internacionalización
+Monitor2._0.Properties.Resources.Culture = new System.Globalization.CultureInfo("es-MX");
+
+
