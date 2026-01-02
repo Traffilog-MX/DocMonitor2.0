@@ -408,3 +408,32 @@ Ambos endpoints apuntan a la misma URL:
     "typeReuseMode": "Specified"
   }
 }
+```
+
+⚙️ Configuración en App.config
+
+- Server1
+- Servidor principal: units-mx.traffilog.com
+- UnitTimeout1
+- Tiempo de espera para la primera operación de unidad: 8 segundos
+- UnitTimeout2
+- Tiempo de espera para la segunda operación de unidad: 10 segundos
+- CommandTimeout
+- Tiempo máximo para ejecutar un comando individual: 10 segundos
+- CommandTimeoutBulk
+- Tiempo máximo para ejecutar comandos en lote: 250 segundos
+
+📂 Fragmento del fichero
+
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="Server1" value="units-mx.traffilog.com" />
+    <add key="UnitTimeout1" value="8" />
+    <add key="UnitTimeout2" value="10" />
+    <add key="CommandTimeout" value="10" />
+    <add key="CommandTimeoutBulk" value="250" />
+  </appSettings>
+</configuration>
+
+
