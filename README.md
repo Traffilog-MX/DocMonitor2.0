@@ -302,3 +302,109 @@ var client12 = new ServiceReference1.ConnectionModulesDBSoapClient(
 
 // Invocar un método
 var data = client.getUnitData("Truck", "12345");
+```
+
+# Connected Service: ServiceReference2
+
+Este servicio conectado se encuentra en:
+
+C:\Users\Numaris Traffilog\source\repos\Monitor2.0\Connected Services\ServiceReference2\
+
+
+Incluye los archivos:
+- **`Reference.cs`** → código generado automáticamente para consumir el servicio web SOAP.  
+- **`ConnectedService.json`** → metadatos y configuración del servicio conectado.
+
+---
+
+## 📌 Descripción
+
+- El servicio **ServiceReference2** corresponde a una referencia a un **Web Service SOAP (.asmx)** expuesto en:  
+
+https://app.mx.questarauto.com:81/internal/utilities.asmx
+
+- Visual Studio genera automáticamente:
+- **`Reference.cs`** → clases proxy y métodos para invocar operaciones del servicio.  
+- **`ConnectedService.json`** → configuración del cliente, mapeo de namespaces y opciones de generación.  
+
+---
+
+## 🛠️ Interfaces y clases principales
+
+### `UtilitiesSoap` (Interface)
+Contrato del servicio SOAP con los siguientes métodos:
+
+- `CopySchemeToClient(long SchemeId, long ClientId)`  
+Copia un esquema a un cliente.  
+
+- `copyVehicleSchemesToVehicles(long SOURCE_VEHICLE, string TARGET_VEHICLES)`  
+Copia esquemas de un vehículo fuente a múltiples vehículos destino.  
+
+- `logUnit(long UnitId, DateTime startdate, DateTime endDate)`  
+Obtiene registros de una unidad en un rango de fechas.  
+
+Cada método tiene versión **síncrona** y **asíncrona** (`Async`).
+
+### `UtilitiesSoapChannel`
+- Extiende la interfaz `UtilitiesSoap` e implementa `IClientChannel`.  
+- Se utiliza internamente para la comunicación con el servicio.
+
+### `UtilitiesSoapClient`
+- Clase cliente que hereda de `ClientBase<T>`.  
+- Implementa todos los métodos definidos en la interfaz.  
+- Permite configurar el **endpoint** y las **credenciales**.  
+- Métodos de construcción:
+- Con `EndpointConfiguration`.  
+- Con dirección remota (`string` o `EndpointAddress`).  
+- Con `Binding` y `EndpointAddress`.  
+- Métodos expuestos:
+- `CopySchemeToClient(...)` / `CopySchemeToClientAsync(...)`  
+- `copyVehicleSchemesToVehicles(...)` / `copyVehicleSchemesToVehiclesAsync(...)`  
+- `logUnit(...)` / `logUnitAsync(...)`  
+
+---
+
+## ⚙️ Configuración de endpoints y bindings
+
+- **EndpointConfiguration.UtilitiesSoap**  
+- Usa `BasicHttpBinding`.  
+- Configuración:  
+  - `MaxBufferSize = int.MaxValue`  
+  - `MaxReceivedMessageSize = int.MaxValue`  
+  - `ReaderQuotas = XmlDictionaryReaderQuotas.Max`  
+  - `AllowCookies = true`  
+
+- **EndpointConfiguration.UtilitiesSoap12**  
+- Usa `CustomBinding` con soporte para **SOAP 1.2**.  
+- Elementos:  
+  - `TextMessageEncodingBindingElement` → versión SOAP 1.2.  
+  - `HttpsTransportBindingElement` → transporte seguro HTTPS.  
+
+Ambos endpoints apuntan a la misma URL:  
+
+
+---
+
+## 📂 Configuración en ConnectedService.json
+
+```json
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://app.mx.questarauto.com/internal/utilities.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServiceReference2"
+    ],
+    "references": [
+      "EntityFramework, {EntityFramework, 6.4.4}"
+    ],
+    "sync": true,
+    "targetFramework": "net8.0",
+    "typeReuseMode": "Specified"
+  }
+}
