@@ -302,4 +302,3 @@ var client12 = new ServiceReference1.ConnectionModulesDBSoapClient(
 
 // Invocar un método
 var data = client.getUnitData("Truck", "12345");
-
