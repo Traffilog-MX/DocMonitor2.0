@@ -168,3 +168,74 @@ string conexionDB = Monitor2._0.Properties.Settings.Default.DB;
 Monitor2._0.Properties.Settings.Default.UserName = "admin";
 Monitor2._0.Properties.Settings.Default.S3AccessKey = "mi-access-key";
 Monitor2._0.Properties.Settings.Default.Save(); // Guardar cambios
+
+
+# Archivo ClickOnceProfile.pubxml
+
+
+---
+
+## 📌 Descripción
+
+- Define la configuración de publicación del proyecto mediante **ClickOnce**, una tecnología de despliegue para aplicaciones de escritorio en .NET.  
+- Permite especificar:
+  - Versión de la aplicación.
+  - Directorio y protocolo de publicación.
+  - Archivos incluidos en el paquete.
+  - Dependencias necesarias en el cliente (bootstrapper packages).
+- Se utiliza cuando se publica la aplicación desde Visual Studio con la opción **Publish**.
+
+---
+
+## 🛠️ Configuración principal
+
+- **ApplicationRevision:** `21` → número de revisión de la aplicación.  
+- **ApplicationVersion:** `1.0.0.*` → versión de la aplicación, con incremento automático en la revisión.  
+- **Configuration:** `Release` → se publica en modo Release.  
+- **Platform:** `x64` → compilación para arquitectura de 64 bits.  
+- **PublishDir:** `bin\Release\net8.0-windows\app.publish\` → carpeta donde se generan los archivos publicados.  
+- **PublishUrl / InstallUrl:** `\\DESKTOP-QGQAB74\Monitor2.0\` → ruta UNC donde se distribuye la aplicación.  
+- **PublishProtocol:** `ClickOnce` → protocolo de publicación.  
+- **TargetFramework:** `net8.0-windows` → framework objetivo.  
+- **CreateDesktopShortcut:** `True` → se crea acceso directo en el escritorio.  
+- **UpdateEnabled:** `True` → habilita actualizaciones automáticas.  
+- **UpdateMode:** `Foreground` → las actualizaciones se aplican al iniciar la aplicación.  
+
+---
+
+## 📂 Archivos incluidos en la publicación
+
+El perfil asegura que ciertos archivos de configuración y recursos se incluyan en el paquete:
+
+- `Config\CENTRO.txt`  
+- `Config\GASP.txt`  
+- `Config\GOLFO.txt`  
+- `Config\NORTE.txt`  
+- `Config\PACIFICO.txt`  
+- `Config\Params Codes.txt`  
+- `monkey_39003.ico`  
+
+Cada archivo se marca con:
+- **PublishState:** `Include` → se incluye en la publicación.  
+- **IncludeHash:** `true` → se valida integridad mediante hash.  
+- **FileType:** `File` → tipo de recurso.
+
+---
+
+## 📦 Paquetes bootstrapper
+
+El perfil también define los paquetes que deben instalarse en el cliente antes de ejecutar la aplicación:
+
+- **Microsoft.EdgeRuntime** → instala el runtime de **Edge WebView**.  
+- **Microsoft.NetCore.DesktopRuntime.8.0.x64** → instala el runtime de **.NET Desktop 8.0.4 (x64)**.  
+
+---
+
+## 🚀 Objetivo del perfil
+
+- Facilitar la distribución de la aplicación **Monitor2.0** mediante **ClickOnce**.  
+- Garantizar que los usuarios finales tengan instaladas las dependencias necesarias.  
+- Incluir archivos de configuración críticos y recursos visuales en el paquete de despliegue.  
+- Permitir actualizaciones automáticas sin necesidad de reinstalación manual.
+
+---
