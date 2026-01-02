@@ -238,3 +238,68 @@ El perfil también define los paquetes que deben instalarse en el cliente antes 
 - Permitir actualizaciones automáticas sin necesidad de reinstalación manual.
 
 ---
+
+# Complemento de Reference.cs (Bindings y Endpoints)
+
+
+---
+
+## 📌 Descripción
+
+- Define cómo se conecta el cliente (`ConnectionModulesDBSoapClient`) al servicio remoto.  
+- Incluye métodos estáticos para obtener:
+  - **Binding** → protocolo y configuración de transporte.  
+  - **EndpointAddress** → dirección URL del servicio.  
+- También define la enumeración **`EndpointConfiguration`** para seleccionar entre diferentes configuraciones de conexión.
+
+---
+
+## 🛠️ Métodos principales
+
+### `GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)`
+- Devuelve el **binding** apropiado según el endpoint seleccionado.  
+- Configuraciones disponibles:
+  - **ConnectionModulesDBSoap**  
+    - Usa `BasicHttpsBinding`.  
+    - Configuración:
+      - `MaxBufferSize = int.MaxValue`  
+      - `MaxReceivedMessageSize = int.MaxValue`  
+      - `ReaderQuotas = XmlDictionaryReaderQuotas.Max`  
+      - `AllowCookies = true`  
+  - **ConnectionModulesDBSoap12**  
+    - Usa `CustomBinding` con soporte para **SOAP 1.2**.  
+    - Elementos:
+      - `TextMessageEncodingBindingElement` → define versión SOAP 1.2.  
+      - `HttpsTransportBindingElement` → transporte seguro HTTPS.  
+      - Configuración similar: `AllowCookies`, `MaxBufferSize`, `MaxReceivedMessageSize`.
+
+### `GetEndpointAddress(EndpointConfiguration endpointConfiguration)`
+- Devuelve la **URL del servicio** según el endpoint seleccionado.  
+- Ambos endpoints (`ConnectionModulesDBSoap` y `ConnectionModulesDBSoap12`) apuntan a:
+
+https://app.mx.questarauto.com/ConnectionModulesDB/default.asmx
+
+
+### `EndpointConfiguration` (Enum)
+- Define las opciones de conexión disponibles:
+- `ConnectionModulesDBSoap` → SOAP 1.1 con `BasicHttpsBinding`.  
+- `ConnectionModulesDBSoap12` → SOAP 1.2 con `CustomBinding`.
+
+---
+
+## 🚀 Ejemplo de uso
+
+```csharp
+// Crear cliente con configuración SOAP 1.1
+var client = new ServiceReference1.ConnectionModulesDBSoapClient(
+  ServiceReference1.ConnectionModulesDBSoapClient.EndpointConfiguration.ConnectionModulesDBSoap
+);
+
+// Crear cliente con configuración SOAP 1.2
+var client12 = new ServiceReference1.ConnectionModulesDBSoapClient(
+  ServiceReference1.ConnectionModulesDBSoapClient.EndpointConfiguration.ConnectionModulesDBSoap12
+);
+
+// Invocar un método
+var data = client.getUnitData("Truck", "12345");
+
