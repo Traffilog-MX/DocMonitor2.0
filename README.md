@@ -64,12 +64,6 @@ El tipo exacto de proyecto se define en la primera línea del `.csproj`:
 
 # Clase Resources.Designer.cs
 
-Este archivo corresponde a la clase **`Resources`** ubicada en:
-
-```xml
-C:\Users\Numaris Traffilog\source\repos\Monitor2.0\Properties\Resources.Designer.csproj
-
-
 ---
 
 ## 📌 Descripción
