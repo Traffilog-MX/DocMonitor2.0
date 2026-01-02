@@ -172,7 +172,6 @@ Monitor2._0.Properties.Settings.Default.Save(); // Guardar cambios
 
 # Archivo ClickOnceProfile.pubxml
 
-
 ---
 
 ## 📌 Descripción
