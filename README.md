@@ -58,7 +58,6 @@ El archivo `*.csproj` cumple el mismo rol que el `pom.xml` en proyectos Maven/Sp
 
 El tipo exacto de proyecto se define en la primera línea del `.csproj`:
 
-```xml
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 
@@ -111,4 +110,61 @@ string mensaje = Monitor2._0.Properties.Resources.MiCadena;
 // Cambiar cultura para internacionalización
 Monitor2._0.Properties.Resources.Culture = new System.Globalization.CultureInfo("es-MX");
 
+# Clase Settings.Designer.cs
 
+
+---
+
+## 📌 Descripción
+
+- La clase **`Settings`** es **auto-generada** por Visual Studio mediante el **Settings Designer**.  
+- Su propósito es proveer acceso **fuertemente tipado** a configuraciones de la aplicación y del usuario.  
+- Se basa en el archivo **`Settings.settings`** dentro de la carpeta `Properties`.  
+- **No debe editarse manualmente**, ya que cualquier cambio se perderá al regenerar el archivo.
+
+---
+
+## 🛠️ Funcionalidad principal
+
+- **`Default`**  
+  - Devuelve una instancia única (`singleton`) de la clase `Settings`.  
+  - Se utiliza para acceder a las configuraciones definidas.  
+
+- **Configuraciones definidas:**
+  - `UserName` → Nombre de usuario (configuración de usuario).  
+  - `CommandTimeout` → Tiempo de espera para comandos (valor por defecto: `10`).  
+  - `CommandTimeoutBulk` → Tiempo de espera para operaciones masivas (valor por defecto: `250`).  
+  - `S3AccessKey`, `S3Secret`, `S3BucketName`, `S3ClientName` → Credenciales y configuración de acceso a Amazon S3.  
+  - `UnitTimeout1` → Tiempo de espera de unidad (valor por defecto: `4`).  
+  - `APIToken` y `APITokenDate` → Token de autenticación y fecha de emisión.  
+  - `DB` → Cadena de conexión a base de datos PostgreSQL (valor por defecto incluye host, usuario y contraseña).  
+  - `Server1` → Servidor principal (valor por defecto: `units-admin.mx.questarauto.com`).  
+  - `UnitTimeout2` → Tiempo de espera adicional de unidad (valor por defecto: `5`).  
+  - `DisconnectedTime` → Tiempo máximo de desconexión permitido (valor por defecto: `120`).  
+
+---
+
+## ⚙️ Atributos importantes
+
+- `[CompilerGenerated]` → indica que el código fue generado por el compilador.  
+- `[GeneratedCode]` → señala que el archivo fue generado automáticamente por Visual Studio.  
+- `[UserScopedSetting]` → configuración específica de cada usuario.  
+- `[ApplicationScopedSetting]` → configuración compartida por toda la aplicación.  
+- `[DefaultSettingValue]` → valor por defecto de cada propiedad.  
+- `[DebuggerNonUserCode]` → evita que el depurador entre en este código.  
+
+---
+
+## 🚀 Uso en el proyecto
+
+Ejemplo de cómo acceder y modificar configuraciones:
+
+```csharp
+// Obtener valores
+string usuario = Monitor2._0.Properties.Settings.Default.UserName;
+string conexionDB = Monitor2._0.Properties.Settings.Default.DB;
+
+// Modificar valores de usuario
+Monitor2._0.Properties.Settings.Default.UserName = "admin";
+Monitor2._0.Properties.Settings.Default.S3AccessKey = "mi-access-key";
+Monitor2._0.Properties.Settings.Default.Save(); // Guardar cambios
